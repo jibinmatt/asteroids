@@ -7,6 +7,9 @@ int main() {
   SDL_Window *window;
   bool sdlInitialized;
   bool isRunning = true;
+  Uint64 timeElapsed;
+  Uint64 tempCounter = 0;
+  float deltaTime = 0;
 
   // initialize SDL
   sdlInitialized = SDL_Init(SDL_INIT_VIDEO);
@@ -26,11 +29,13 @@ int main() {
     return 1;
   }
 
+  tempCounter = SDL_GetTicksNS();
 
   // Game loop/event loop
   while(isRunning) {
+
     SDL_Event event;
-    while (SDL_PollEvent(&event)){
+    while (SDL_PollEvent(&event)) {
 
       // Keyboard key pressed
       if(event.type == SDL_EVENT_KEY_DOWN) {
@@ -59,14 +64,22 @@ int main() {
         // SDL_Log("Key pressed: %s\n", SDL_GetKeyName(keyPressed));
       }
 
-      playerMovement();
 
       // User requested close event
       if(event.type == SDL_EVENT_QUIT) {
         isRunning = false;
       }
     }
+    
+    // frame timing nonsense
+    timeElapsed = SDL_GetTicksNS(); // current timestamp
+    deltaTime = (timeElapsed - tempCounter)/1000000.0;
+    tempCounter = timeElapsed;
+    // SDL_Log("Time elapsed between iterations: %lf\n", deltaTime);
     SDL_Delay(1); // Replace with proper Frame-Timing later
+
+    
+    playerMovement(deltaTime);
   }
 
   // cleanup and destroy window
