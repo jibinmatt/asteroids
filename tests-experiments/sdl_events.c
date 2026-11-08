@@ -1,4 +1,5 @@
 #include <SDL3/SDL.h>
+#include "asteroids.h"
 
 int main() {
 
@@ -28,21 +29,37 @@ int main() {
 
   // Game loop/event loop
   while(isRunning) {
-
     SDL_Event event;
-    
     while (SDL_PollEvent(&event)){
-      
+
+      // Keyboard key pressed
       if(event.type == SDL_EVENT_KEY_DOWN) {
         SDL_Keymod keyModState;
         SDL_Keycode keyPressed;
+        bool keyRepeatPressed;
 
         keyModState = event.key.mod;
         keyPressed = event.key.key;
+        keyRepeatPressed = event.key.repeat;
 
-        SDL_Log("Key modifier: %u\n", (unsigned int)keyModState);
-        SDL_Log("Key pressed: %s\n", SDL_GetKeyName(keyPressed));
+        // SDL_Log("Key modifier: %u\n", (unsigned int)keyModState);
+        // SDL_Log("Key pressed: %s\n", SDL_GetKeyName(keyPressed));
+        // SDL_Log("Key repeatedly pressed: %d\n", keyRepeatPressed);
       }
+      
+      // Keyboard key release
+      if(event.type == SDL_EVENT_KEY_UP) {
+        SDL_Keymod keyModState;
+        SDL_Keycode keyPressed;
+        
+        keyModState = event.key.mod;
+        keyPressed = event.key.key;
+
+        // SDL_Log("Key modifier: %u\n", (unsigned int)keyModState);
+        // SDL_Log("Key pressed: %s\n", SDL_GetKeyName(keyPressed));
+      }
+
+      playerMovement();
 
       // User requested close event
       if(event.type == SDL_EVENT_QUIT) {
