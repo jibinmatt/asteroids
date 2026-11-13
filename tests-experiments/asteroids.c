@@ -16,7 +16,7 @@ int playerMovement(float deltaTime, GameObject *player) {
   distance = PLAYER_SPEED_IN_PIXELS_PER_SECOND * deltaTimeInSeconds;
 
   if(keyStates[SDL_SCANCODE_W]) {
-    player->velocityY -= player->acceleration * deltaTimeInSeconds;
+    player->velocityY += player->acceleration * deltaTimeInSeconds;
     player->yPosition -= player->velocityY * deltaTimeInSeconds;
     SDL_Log("You moved up by %f\n", player->yPosition);
   }
@@ -28,7 +28,7 @@ int playerMovement(float deltaTime, GameObject *player) {
   }
   
   if(keyStates[SDL_SCANCODE_A]) {
-    player->velocityX -= player->acceleration * deltaTimeInSeconds;
+    player->velocityX += player->acceleration * deltaTimeInSeconds;
     player->xPosition -= player->velocityX * deltaTimeInSeconds;
     SDL_Log("You moved left by %f\n", player->xPosition);
   }
