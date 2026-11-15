@@ -2,7 +2,7 @@ CC = gcc
 PKG_CONFIG ?= pkg-config
 
 TARGET = build/asteroids.exe
-SOURCES = src/main.c src/asteroid.c src/spaceship.c
+SOURCES = src/main.c src/asteroid.c src/spaceship.c src/tomlc17.c src/settings.c
 OBJECTS = $(SOURCES:src/%.c=build/%.o)
 DEPFILES = $(OBJECTS:.o=.d)
 

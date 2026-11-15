@@ -1,28 +1,37 @@
 #include <SDL3/SDL.h>
+#include "tomlc17.h"
 #include "asteroid.h"
 #include "spaceship.h"
 #include "game_object.h"
-#include "main.h"
-
-#define WINDOW_WIDTH 1000
-#define WINDOW_HEIGHT 800
+#include "settings.h"
 
 int main() {
 
   // SDL Variables
   SDL_Window *window = NULL;
   SDL_Renderer *renderer = NULL;
-
+  
   // Game variables
   bool isRunning = true;
   Uint64 timeElapsed;
   Uint64 tempCounter = 0;
   float deltaTime = 0;
 
+  // GameSettings initialization
+    GameSettings settings = {
+    .windowWidth = 400,
+    .windowHeight = 400,
+    .isFullscreen = false,
+    .targetFPS = 60
+  };
+  if (parseAndUpdateSettings(&settings)) {
+    SDL_Quit();
+    return 1;
+  }
   // player initialization
   GameObject player = {
-    .xPosition = WINDOW_WIDTH/2.0,
-    .yPosition =  WINDOW_HEIGHT/2.0,
+    .xPosition = settings.windowWidth/2.0,
+    .yPosition =  settings.windowHeight/2.0,
     .velocityX = 100,
     .velocityY = 100,
     .acceleration = 10,
@@ -39,6 +48,7 @@ int main() {
     .rotation = 0
   };
 
+
   // initialize SDL
   if (!SDL_Init(SDL_INIT_VIDEO)) {
     SDL_LogError(SDL_LOG_CATEGORY_ERROR, "Could not initialize SDL: %s\n", SDL_GetError());
@@ -47,14 +57,13 @@ int main() {
   }
 
   // initialize game window
-  if(!SDL_CreateWindowAndRenderer("Asteroids", WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_RESIZABLE, &window, &renderer)) {
+  if(!SDL_CreateWindowAndRenderer("Asteroids", settings.windowWidth, settings.windowHeight, SDL_WINDOW_RESIZABLE, &window, &renderer)) {
     SDL_LogError(SDL_LOG_CATEGORY_ERROR, "Could not create window and renderer: %s\n", SDL_GetError());
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
     return 1;
   }
-
   
   tempCounter = SDL_GetTicksNS();
   
