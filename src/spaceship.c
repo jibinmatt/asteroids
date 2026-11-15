@@ -1,5 +1,6 @@
 #include <SDL3/SDL.h>
 #include "spaceship.h"
+#include "game_object.h"
 
 int PLAYER_SPEED_IN_PIXELS_PER_SECOND = 300;
 

@@ -1,6 +1,7 @@
 #include <SDL3/SDL.h>
 #include "asteroid.h"
 #include "spaceship.h"
+#include "game_object.h"
 #include "main.h"
 
 #define WINDOW_WIDTH 1000

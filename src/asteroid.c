@@ -1,5 +1,6 @@
 #include <SDL3/SDL.h>
-#include "spaceship.h"
+#include "asteroid.h"
+#include "game_object.h"
 
 int ASTEROID_SPEED_IN_PIXELS_PER_SECOND = 200; // will be dynamic
 
