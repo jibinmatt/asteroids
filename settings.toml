@@ -1,0 +1,10 @@
+[window]
+width = 1000
+height = 800
+isFullscreen = false
+
+[graphics]
+targetFPS = 60
+
+[gameplay]
+# to be added later
