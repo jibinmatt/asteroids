@@ -18,16 +18,19 @@ int main() {
   float deltaTime = 0;
 
   // GameSettings initialization
-    GameSettings settings = {
+  GameSettings settings = {
     .windowWidth = 400,
     .windowHeight = 400,
     .isFullscreen = false,
     .targetFPS = 60
   };
+
   if (parseAndUpdateSettings(&settings)) {
+    SDL_LogError(SDL_LOG_PRIORITY_ERROR, "Could not parse settings.toml file");
     SDL_Quit();
     return 1;
   }
+
   // player initialization
   GameObject player = {
     .xPosition = settings.windowWidth/2.0,
@@ -104,7 +107,7 @@ int main() {
       return 1;
     }
     // SDL_Log("Delta time: %f ms", deltaTime);
-    playerMovement(deltaTime, &player);
+    spaceshipMovement(deltaTime, &player);
     asteroidMovement(deltaTime, &asteroid);
 
     // render spaceship

@@ -2,7 +2,6 @@
 #ifndef GAME_OBJECT_H
 #define GAME_OBJECT_H
 
-
 // Define GameObject Instance
 typedef struct {
   float xPosition;

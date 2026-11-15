@@ -7,7 +7,7 @@ int parseAndUpdateSettings(GameSettings *settings) {
   // Parse settings file
   toml_result_t tomlResult = toml_parse_file_ex("settings.toml");
   if (!tomlResult.ok) {
-    SDL_Log("Could not parse settings.toml file: %s\n", tomlResult.errmsg);
+    SDL_LogError(SDL_LOG_PRIORITY_ERROR, "Could not parse settings.toml file: %s\n", tomlResult.errmsg);
     toml_free(tomlResult);
     return 1;
   }
@@ -33,7 +33,7 @@ int parseAndUpdateSettings(GameSettings *settings) {
       settings->targetFPS = settingsTargetFPS.u.int64;
   }
   
-  // Free the document tree after use
+  // Free the document tree struct after use
   toml_free(tomlResult);
 
   return 0;

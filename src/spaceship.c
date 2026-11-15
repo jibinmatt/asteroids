@@ -2,18 +2,17 @@
 #include "spaceship.h"
 #include "game_object.h"
 
-int PLAYER_SPEED_IN_PIXELS_PER_SECOND = 300;
+int SPACESHIP_SPEED_IN_PIXELS_PER_SECOND = 300;
 
-int playerMovement(float deltaTime, GameObject *player) {
+int spaceshipMovement(float deltaTime, GameObject *player) {
   // distance moved = speed * delta_time
   // delta_time is elapsed time
   // velocity is change in distance by time;
   // acceleration is change in velocity divided by time.
 
   const bool *keyStates = SDL_GetKeyboardState(NULL);
-  float distance = 0;
   float deltaTimeInSeconds = deltaTime/1000.0;
-  distance = PLAYER_SPEED_IN_PIXELS_PER_SECOND * deltaTimeInSeconds;
+  // float distance = SPACESHIP_SPEED_IN_PIXELS_PER_SECOND * deltaTimeInSeconds;
 
   // WASD Movement
   if(keyStates[SDL_SCANCODE_W]) {
