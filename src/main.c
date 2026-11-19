@@ -1,5 +1,8 @@
+// Libraries
 #include <SDL3/SDL.h>
 #include "tomlc17.h"
+
+// Game header files
 #include "asteroid.h"
 #include "spaceship.h"
 #include "game_object.h"
